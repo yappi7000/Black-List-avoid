@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ブラック回避完全マニュアル｜やっっぴ〜</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg: #080c10;
+  --surface: #0d1117;
+  --surface2: #161b22;
+  --border: #21262d;
+  --accent: #ff3b3b;
+  --accent2: #ff6b35;
+  --green: #00ff87;
+  --blue: #00d4ff;
+  --warn: #ffd60a;
+  --text: #e6edf3;
+  --text2: #8b949e;
+  --text3: #484f58;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans JP', sans-serif;
+  min-height: 100vh;
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* ヘッダー */
+.header {
+  margin-bottom: 48px;
+  animation: fadeDown 0.6s ease both;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.danger-banner {
+  background: linear-gradient(135deg, #ff3b3b15, #ff6b3510);
+  border: 1px solid #ff3b3b30;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #ff8080;
+}
+
+.badge-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.badge-red { background: #ff3b3b20; border: 1px solid #ff3b3b50; color: var(--accent); }
+.badge-gray { background: #ffffff10; border: 1px solid #ffffff20; color: var(--text2); }
+
+h1 {
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+
+h1 .highlight {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lead {
+  color: var(--text2);
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* セクション */
+.section {
+  margin-bottom: 40px;
+  animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section:nth-child(1) { animation-delay: 0.1s; }
+.section:nth-child(2) { animation-delay: 0.15s; }
+.section:nth-child(3) { animation-delay: 0.2s; }
+.section:nth-child(4) { animation-delay: 0.25s; }
+.section:nth-child(5) { animation-delay: 0.3s; }
+.section:nth-child(6) { animation-delay: 0.35s; }
+.section:nth-child(7) { animation-delay: 0.4s; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border-left: 3px solid;
+}
+
+.sec-red { background: #ff3b3b0a; border-color: var(--accent); }
+.sec-orange { background: #ff6b350a; border-color: var(--accent2); }
+.sec-yellow { background: #ffd60a0a; border-color: var(--warn); }
+.sec-green { background: #00ff870a; border-color: var(--green); }
+.sec-blue { background: #00d4ff0a; border-color: var(--blue); }
+
+.section-icon { font-size: 22px; }
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.sec-red .section-title { color: var(--accent); }
+.sec-orange .section-title { color: var(--accent2); }
+.sec-yellow .section-title { color: var(--warn); }
+.sec-green .section-title { color: var(--green); }
+.sec-blue .section-title { color: var(--blue); }
+
+/* リストアイテム */
+.rule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.rule-item:hover { border-color: var(--text3); }
+
+.rule-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.sec-red .rule-dot { background: var(--accent); }
+.sec-orange .rule-dot { background: var(--accent2); }
+.sec-yellow .rule-dot { background: var(--warn); }
+.sec-green .rule-dot { background: var(--green); }
+.sec-blue .rule-dot { background: var(--blue); }
+
+.rule-text {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.rule-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.rule-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+  align-self: flex-start;
+}
+
+.tag-ng { background: #ff3b3b20; color: var(--accent); border: 1px solid #ff3b3b30; }
+.tag-ok { background: #00ff8720; color: var(--green); border: 1px solid #00ff8730; }
+.tag-warn { background: #ffd60a20; color: var(--warn); border: 1px solid #ffd60a30; }
+
+/* 重要ボックス */
+.important-box {
+  background: linear-gradient(135deg, #ff3b3b08, #ff6b3508);
+  border: 1px solid #ff3b3b25;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin: 32px 0;
+}
+
+.important-box h3 {
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.important-box p {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text3);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="badge-row">
+      <span class="badge badge-red">⚠️ CRITICAL</span>
+      <span class="badge badge-gray">2026年5月版</span>
+    </div>
+    <h1>ブラック回避<br><span class="highlight">完全マニュアル</span></h1>
+    <p class="lead">MNPで稼ぎ続けるために絶対に守るべきルール集。やっっぴ〜の実体験から抽出。</p>
+
+    <div class="danger-banner" style="margin-top:20px;">
+      ⚠️ ブラックリスト入りすると全キャリアでの新規契約・MNPが数年間不可能になります。一つひとつ確実に守ること。
+    </div>
+  </div>
+
+  <!-- 維持期間 -->
+  <div class="section sec-red">
+    <div class="section-header sec-red">
+      <span class="section-icon">⏱️</span>
+      <span class="section-title">維持期間のルール</span>
+    </div>
+    <div class="rule-list">
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text"><strong>最低3ヶ月</strong>は同じキャリアを維持する（理想は6ヶ月）</div>
+        <span class="rule-tag tag-ng">絶対守る</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">同一回線グループ（例：au・UQ・povo）への連続MNPは<strong>最低1年以上</strong>間隔を空ける</div>
+        <span class="rule-tag tag-ng">要注意</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">docomo系（ahamo・irumo含む）→docomo系は<strong>1年以上</strong>は必ず空ける</div>
+        <span class="rule-tag tag-ng">要注意</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">SoftBank系（ワイモバイル・LINEMO含む）も同様に<strong>グループ単位</strong>で管理する</div>
+        <span class="rule-tag tag-warn">注意</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">契約から<strong>60日以内の解約</strong>は最もリスクが高い。どんな事情があっても避ける</div>
+        <span class="rule-tag tag-ng">絶対守る</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">オプション加入条件がある場合、条件期間終了まで<strong>絶対に解約しない</strong></div>
+        <span class="rule-tag tag-ng">絶対守る</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">楽天モバイルは比較的制限が緩いが、<strong>1年未満の連続乗り換え</strong>は避けること</div>
+        <span class="rule-tag tag-warn">注意</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 稼働・使用状況 -->
+  <div class="section sec-orange">
+    <div class="section-header sec-orange">
+      <span class="section-icon">📡</span>
+      <span class="section-title">稼働・使用状況のルール</span>
+    </div>
+    <div class="rule-list">
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">契約後は<strong>月に最低3〜5回</strong>の発着信・通信を行う（死回線扱いを避ける）</div>
+        <span class="rule-tag tag-ok">必須</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">データ通信を<strong>月1GB以上</strong>使用することを目安にする</div>
+        <span class="rule-tag tag-ok">推奨</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">通話・通信が<strong>完全ゼロの月</strong>が続くと不正利用を疑われるリスクあり</div>
+        <span class="rule-tag tag-warn">注意</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">SIMを<strong>別端末に差し替えて使う</strong>のは問題なし。ただし頻繁すぎる端末変更は注意</div>
+        <span class="rule-tag tag-ok">OK</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">契約と<strong>異なる住所・エリア</strong>でのみ使用し続けるのはリスクあり</div>
+        <span class="rule-tag tag-warn">注意</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">家族・友人のスマホで使う際も<strong>最低限の稼働</strong>を確保してもらう</div>
+        <span class="rule-tag tag-ok">推奨</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 契約・審査 -->
+  <div class="section sec-yellow">
+    <div class="section-header sec-yellow">
+      <span class="section-icon">📝</span>
+      <span class="section-title">契約・審査のルール</span>
+    </div>
+    <div class="rule-list">
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">同一名義で同一キャリアは<strong>最大2〜3回線</strong>が目安（キャリアによる）</div>
+        <span class="rule-tag tag-warn">注意</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">審査落ちした場合は<strong>最低1ヶ月、理想3ヶ月</strong>空けてから再申込み</div>
+        <span class="rule-tag tag-ng">守る</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">支払いは<strong>クレジットカード自動引き落とし</strong>を設定して滞納ゼロを徹底</div>
+        <span class="rule-tag tag-ng">絶対守る</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">申込書の記載内容は<strong>正確に</strong>記入。虚偽申告は最大の禁忌</div>
+        <span class="rule-tag tag-ng">絶対守る</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">同一住所への複数名義契約は<strong>家族構成と合致</strong>させること</div>
+        <span class="rule-tag tag-warn">注意</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">法人名義での契約は個人とは<strong>別カウント</strong>。ただし審査基準が厳しい場合も</div>
+        <span class="rule-tag tag-ok">参考</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">割賦端末の残債は<strong>MNP前に完済</strong>。残債ありのままMNPはキャリアにより不可</div>
+        <span class="rule-tag tag-ng">守る</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 店舗・店員対応 -->
+  <div class="section sec-green">
+    <div class="section-header sec-green">
+      <span class="section-icon">🏪</span>
+      <span class="section-title">店舗・店員対応のルール</span>
+    </div>
+    <div class="rule-list">
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">転売・ビジネス目的であることを<strong>絶対に匂わせない</strong></div>
+        <span class="rule-tag tag-ng">絶対守る</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">「何台目ですか？」と聞かれたら<strong>「家族用です」「仕事用です」</strong>と自然に答える</div>
+        <span class="rule-tag tag-ok">対応策</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">同じ店舗への<strong>短期間での再来店</strong>は避ける（顔を覚えられるリスク）</div>
+        <span class="rule-tag tag-warn">注意</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">店員がマニュアル外の提案をしてきても<strong>すぐに飛びつかない</strong>。書面確認が先</div>
+        <span class="rule-tag tag-ok">推奨</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">断られた店舗には<strong>しばらく近づかない</strong>。別の店舗・別の代理店を探す</div>
+        <span class="rule-tag tag-ok">対応策</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">不審な点があっても<strong>穏やかに・丁寧に</strong>対応。クレーマー扱いされると記録が残る</div>
+        <span class="rule-tag tag-ok">推奨</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 端末管理 -->
+  <div class="section sec-blue">
+    <div class="section-header sec-blue">
+      <span class="section-icon">📱</span>
+      <span class="section-title">端末・IMEI管理のルール</span>
+    </div>
+    <div class="rule-list">
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">同一端末（同IMEI）で<strong>複数キャリアを頻繁に切り替え</strong>るのは要注意</div>
+        <span class="rule-tag tag-warn">注意</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">転売前に<strong>iCloudロック・Googleアカウント</strong>を完全に解除する</div>
+        <span class="rule-tag tag-ng">絶対守る</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">端末の<strong>個体識別番号（IMEI）</strong>をスプレッドシートで管理し、重複を防ぐ</div>
+        <span class="rule-tag tag-ok">推奨</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">盗難・紛失報告された<strong>ブラックIMEI端末</strong>は絶対に仕入れない</div>
+        <span class="rule-tag tag-ng">絶対守る</span>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot"></div>
+        <div class="rule-text">端末購入後は<strong>新品・未使用の状態</strong>を保つ。傷・破損は査定額に直結</div>
+        <span class="rule-tag tag-ok">推奨</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="important-box">
+    <h3>// FINAL RULE — やっっぴ〜からのひとこと</h3>
+    <p>ブラックリストは一度入ると回復に年単位かかる。利益の最大化よりも<strong>長く続けること</strong>を優先する。1回のMNPで数万円稼ぐより、3年間稼ぎ続ける方が圧倒的に大きい。焦らず、守るべきことを守り続けることが最強の戦略。</p>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 やっっぴ〜 // BLACK LIST AVOIDANCE MANUAL v2026.05</p>
+  </div>
+</div>
+</body>
+</html>
